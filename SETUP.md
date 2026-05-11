@@ -121,7 +121,7 @@ Open **two terminals**, both with ROS2 sourced.
 **Terminal 1 — planner node:**
 ```bash
 cd /path/to/PCT_planner
-python3 run_ros2_interactive.py --skip-tomo
+python3 run_ros2_interactive.py --scene Building
 ```
 
 **Terminal 2 — RViz2:**
@@ -134,7 +134,7 @@ rviz2 -d rsc/rviz/pct_ros2.rviz
 Or use the convenience launcher (opens RViz2 in the same terminal, kills the node on exit):
 
 ```bash
-./launch_ros2.sh --skip-tomo
+./launch_ros2.sh --scene Building
 ```
 
 ---

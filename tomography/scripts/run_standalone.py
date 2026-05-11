@@ -12,7 +12,7 @@ from tomogram import Tomogram
 
 sys.path.append('../')
 from config import Config
-from config import SceneClinic, SceneBuilding, ScenePlaza
+from config import SceneClinic, SceneBuilding, ScenePlaza, SceneSpiral
 
 rsg_root = os.path.dirname(os.path.abspath(__file__)) + '/../..'
 
@@ -20,6 +20,7 @@ SCENES = {
     'Clinic': SceneClinic,
     'Building': SceneBuilding,
     'Plaza': ScenePlaza,
+    'Spiral': SceneSpiral,
 }
 
 
@@ -101,7 +102,7 @@ def run(scene_name):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--scene', type=str, default='Clinic',
-                        help='Scene name: Clinic, Building, Plaza')
+    parser.add_argument('--scene', type=str, default='Spiral',
+                        help='Scene name: Clinic, Building, Plaza, Spiral')
     args = parser.parse_args()
     run(args.scene)

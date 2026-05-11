@@ -1,6 +1,6 @@
 #!/bin/bash
 # Launches the PCT planner node + RViz2 together.
-# Usage: ./launch_ros2.sh [--skip-tomo]
+# Usage: ./launch_ros2.sh [--scene Spiral|Building|Plaza]
 
 set -e
 source /opt/ros/humble/setup.bash

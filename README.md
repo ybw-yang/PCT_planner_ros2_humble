@@ -42,11 +42,12 @@ If you use PCT Planner, please cite the following paper:
 
 - Python >= 3.10
 - [CuPy](https://docs.cupy.dev/en/stable/install.html) matching your CUDA version (e.g. `cupy-cuda12x`)
+- **NVRTC for CuPy 13+:** CuPy loads `libnvrtc` dynamically; if you use pip-installed CUDA stacks without a full toolkit on `LD_LIBRARY_PATH`, also install the matching wheel (e.g. `nvidia-cuda-nvrtc-cu12` alongside `cupy-cuda12x`).
 - Open3D
 - NumPy >= 2.x, SciPy
 
 ```bash
-pip install cupy-cuda12x open3d numpy scipy
+pip install cupy-cuda12x nvidia-cuda-nvrtc-cu12 open3d numpy scipy
 ```
 
 ## Build & Install
@@ -117,7 +118,7 @@ Output: `rsc/tomogram/clinic.pickle`
 ```bash
 # Terminal 1: planner node
 source /opt/ros/humble/setup.bash
-python3 run_ros2_interactive.py --skip-tomo
+python3 run_ros2_interactive.py --scene Building
 
 # Terminal 2: RViz2
 source /opt/ros/humble/setup.bash
@@ -127,8 +128,10 @@ rviz2 -d rsc/rviz/pct_ros2.rviz
 **Option B — single launcher (RViz2 opens automatically):**
 
 ```bash
-./launch_ros2.sh --skip-tomo
+./launch_ros2.sh --scene Building
 ```
+
+If `rsc/tomogram/<stem>.pickle` for that scene already exists (for example from `run_standalone.py`), the node loads it and skips GPU tomography.
 
 ### 4. Pick start and end points in RViz2
 
