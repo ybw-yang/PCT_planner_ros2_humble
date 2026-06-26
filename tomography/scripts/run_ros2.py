@@ -106,9 +106,13 @@ class TomographyNode(Node):
             pickle.dump(data_dict, f, protocol=pickle.HIGHEST_PROTOCOL)
         self.get_logger().info(f'Tomogram exported: {out_path}')
 
+        qos = rclpy.qos.QoSProfile(
+            depth=1,
+            durability=rclpy.qos.QoSDurabilityPolicy.TRANSIENT_LOCAL,
+            reliability=rclpy.qos.QoSReliabilityPolicy.RELIABLE)
         # Publish pointcloud
-        self.pc_pub = self.create_publisher(PointCloud2, '/global_points', 1)
-        self.tomo_pub = self.create_publisher(PointCloud2, '/tomogram', 1)
+        self.pc_pub = self.create_publisher(PointCloud2, '/global_points', qos)
+        self.tomo_pub = self.create_publisher(PointCloud2, '/tomogram', qos)
 
         # Publish original pointcloud
         pc_msg = make_pointcloud2(self, points)
@@ -140,7 +144,7 @@ class TomographyNode(Node):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--scene', type=str, default='Clinic',
+    parser.add_argument('--scene', type=str, default='Building',
                         help='Scene name: Clinic, Building, Plaza')
     args = parser.parse_args()
 
